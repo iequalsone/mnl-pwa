@@ -1,0 +1,17 @@
+body{
+  background: #25262a;
+}
+
+img {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.react-add-to-calendar{
+  position: relative;
+  z-index: 1;
+}
+
+.react-add-to-calendar__dropdown ul{
+  background: white;
+}
