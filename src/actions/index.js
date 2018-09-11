@@ -7,12 +7,21 @@ import {
   FETCH_EVENTS_BY_TAG,
   FETCH_EVENTS_BY_CATEGORY,
   FETCH_ALL_REGIONS,
-  FETCH_EVENT_BY_SLUG
+  FETCH_EVENT_BY_SLUG,
+  TOGGLE_LOADING
 } from "./types";
 
 export const fetchEvents = () => async dispatch => {
   const res = await axios.get("https://musicnl.ca/wp-json/web/v2/full-events-list");
-  dispatch({ type: FETCH_EVENTS, payload: res.data })
+  dispatch({
+    type: FETCH_EVENTS,
+    payload: res.data,
+    meta: {
+      offline: {
+        effect: { url: "https://musicnl.ca/wp-json/web/v2/full-events-list", method: "GET", json: res.data }
+      }
+    }
+  });
 }
 
 export const fetchEventsByKeyword = (keyword) => async dispatch => {
@@ -48,5 +57,9 @@ export const fetchAllRegions = () => async dispatch => {
 export const fetchEventBySlug = (slug) => async dispatch => {
   const res = await axios.get("https://musicnl.ca/wp-json/dc/v2/event/" + encodeURIComponent(slug));
   dispatch({ type: FETCH_EVENT_BY_SLUG, payload: res.data });
+}
+
+export const toggleLoading = (flag) => async dispatch => {
+  dispatch({ type: TOGGLE_LOADING, payload: flag });
 }
 

@@ -24,7 +24,6 @@ class Card extends Component {
   }
 
   renderDateTime(start_date) {
-    // console.log(start_date);
     if (typeof start_date !== "undefined") {
       return (
         <p style={Style.DateStyle} className="card-text start-date">
@@ -113,7 +112,10 @@ const Style = {
     color: "#28a8e0"
   },
   TitleStyle: {
-    color: "#FFFFFF"
+    color: "#FFFFFF",
+    fontSize: "1.5em",
+    textTransform: "uppercase",
+    fontFamily: "'Montserrat', sans-serif"
   }
 };
 

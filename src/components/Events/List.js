@@ -9,20 +9,18 @@ import {
   fetchEventsByDate,
   fetchEventsByTag,
   fetchEventsByRegion,
-  fetchAllRegions
+  fetchAllRegions,
+  toggleLoading
 } from "../../actions";
 
 import Search from "./Search";
 import Card from "./Card";
 import Spinner from "../common/Spinner";
+import AddToHomeScreen from "../common/AddToHomeScreen";
 
 class List extends Component {
   constructor() {
     super();
-
-    this.state = {
-      loading: true
-    }
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onRegionChange = this.onRegionChange.bind(this);
@@ -31,16 +29,18 @@ class List extends Component {
   }
 
   render() {
-    if (this.state.loading) {
+    if (this.props.loading) {
       return <Spinner />;
     } else {
       return (
         <div>
+          <div id="A2HS">{this.renderAddToHomeScreenBtn()}</div>
+
           <Search
             onFormSubmit={this.onFormSubmit}
             onRegionChange={this.onRegionChange}
             onDateChange={this.onDateChange}
-            loading={this.state.loading}
+            loading={this.props.loading}
             toggleLoading={this.toggleLoading}
             regions={this.props.regions}
           />
@@ -54,15 +54,27 @@ class List extends Component {
   }
 
   renderRows() {
-    var rows = _.map(this.props.events, (event, index) => {
+    let rows = [];
+    rows = _.map(this.props.events, (event, index) => {
       return <Card key={event.id} event={event} />;
     });
 
+    // console.log(this.props.events);
+    // console.log(rows.length);
+
     if (rows.length <= 0) {
-      rows.push(<p key="NO_RESULTS">Sorry, no events to display at this time.</p>);
+      rows.push(<p className="text-center" key="NO_RESULTS">Sorry, no events to display at this time.</p>);
     }
 
     return rows;
+  }
+
+  renderAddToHomeScreenBtn() {
+    if (isIos() && !isInStandaloneMode()) {
+      return <AddToHomeScreen />;
+    }
+
+    return;
   }
 
   onFormSubmit(value) {
@@ -78,9 +90,7 @@ class List extends Component {
   }
 
   toggleLoading(flag) {
-    this.setState({
-      loading: flag
-    });
+    this.props.toggleLoading(flag);
   }
 
   componentDidMount() {
@@ -97,15 +107,21 @@ class List extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.events !== this.props.events) {
-      this.setState({
-        loading: false
-      });
+      this.props.toggleLoading(false);
     }
   }
 }
 
-function mapStateToProps({ events, regions }) {
-  return { events, regions }
+// Detects if device is on iOS 
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test(userAgent);
+}
+// Detects if device is in standalone mode
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+function mapStateToProps({ events, regions, loading }) {
+  return { events, regions, loading }
 }
 
 export default connect(mapStateToProps, {
@@ -114,5 +130,6 @@ export default connect(mapStateToProps, {
   fetchEventsByDate,
   fetchEventsByTag,
   fetchEventsByRegion,
-  fetchAllRegions
+  fetchAllRegions,
+  toggleLoading
 })(List);

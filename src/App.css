@@ -1,5 +1,13 @@
 body{
   background: #25262a;
+  font-family: 'Istok Web', sans-serif;
+  color: rgb(155, 156, 159);
+}
+
+h3{
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-size: 1.5em;
 }
 
 img {
@@ -12,6 +20,45 @@ img {
   z-index: 1;
 }
 
-.react-add-to-calendar__dropdown ul{
+.react-add-to-calendar__dropdown {
+  max-width: 12.9em;
+}
+
+.react-add-to-calendar__dropdown ul {
   background: white;
+}
+
+.react-add-to-calendar__dropdown ul a {
+  display: block;
+  padding: .5em;
+}
+
+.react-add-to-calendar__button{
+  display: inline-block;
+  padding: 1em 1.5em;
+  margin-top: 1em;
+  background: #28a8e0;
+}
+
+.react-add-to-calendar__button span{
+  color: white;
+}
+
+.A2HS {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background: white;
+  position: fixed;
+  z-index: 1;
+  padding: 1em;
+}
+
+.A2HS span {
+  font-weight: bold;
+}
+
+.A2HS .icon {
+  width: 20px;
+  height: 20px;
 }

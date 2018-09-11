@@ -56,7 +56,7 @@ class EventHeader extends Component {
       endTime,
     };
 
-    let icon = { "calendar-plus-o": "left" };
+    let icon = { caret: "left" };
 
     return (
       <div className="event-header">
@@ -69,11 +69,11 @@ class EventHeader extends Component {
           <p style={Style.TextStyle} className="card-text location">{location}</p>
           <p style={Style.TextStyle} className="card-text tags">{this.renderTags(tags)}</p>
 
-          <p style={{ backgroundColor: "#28a8e0" }} className="btn"><AddToCalendar
+          <AddToCalendar
             event={event}
             displayItemIcons={false}
             buttonTemplate={icon}
-          /></p>
+          />
         </div>
       </div>
     );
