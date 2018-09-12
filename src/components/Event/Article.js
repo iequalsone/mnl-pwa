@@ -33,7 +33,7 @@ class Article extends Component {
         <Sidebar event={this.props.event} />
 
         <div className="col-12">
-          <NavLink to={"/"}>
+          <NavLink className="btn btn-default" style={{ backgroundColor: "#1b8aba", color: "#ffffff", width: "100%" }} to={"/"}>
             Return to Events List
           </NavLink>
         </div>

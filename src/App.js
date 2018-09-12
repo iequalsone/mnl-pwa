@@ -2,6 +2,7 @@ import "materialize-css/dist/css/materialize.min.css";
 import "materialize-css/dist/js/materialize.min.js";
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import withTracker from "./components/common/WithTracker";
 
 import AppHeader from "./components/AppHeader";
 import EventsList from "./components/Events/List";
@@ -16,15 +17,15 @@ class App extends Component {
         <AppHeader />
         <Router>
           <div className="main">
-            <Route exact path="/" component={EventsList} />
-            <Route exact path="/event/:slug?" component={EventSingle} />
+            <Route exact path="/" component={withTracker(EventsList)} />
+            <Route exact path="/event/:slug?" component={withTracker(EventSingle)} />
             <Route
               path={
                 "/" +
                 process.env.REACT_APP_TAG_URL +
                 "/:tag?"
               }
-              component={EventsList}
+              component={withTracker(EventsList)}
             />
           </div>
         </Router>

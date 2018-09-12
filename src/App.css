@@ -1,4 +1,7 @@
 body{
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
   background: #25262a;
   font-family: 'Istok Web', sans-serif;
   color: rgb(155, 156, 159);
@@ -42,6 +45,8 @@ img {
 
 .react-add-to-calendar__button span{
   color: white;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .A2HS {

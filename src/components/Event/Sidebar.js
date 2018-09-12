@@ -99,7 +99,7 @@ class EventSidebar extends Component {
     } = this.props.event[0];
 
     return (
-      <div className="event-sidebar col-xs-12 col-sm-4 col-md-4">
+      <div className="event-sidebar col-12">
         {this.renderDateCard(start_datetime, website)}
 
         {this.renderLocationCard(location, website)}

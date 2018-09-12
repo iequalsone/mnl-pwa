@@ -2,6 +2,7 @@
 
 import _ from "lodash";
 import React, { Component } from "react";
+import { geolocated } from "react-geolocated";
 
 class Search extends Component {
   constructor() {
@@ -19,7 +20,7 @@ class Search extends Component {
   }
 
   render() {
-    // console.log(this.props.regions);
+    // console.log(this.props.isGeolocationEnabled);
     return (
       <div className="search-form-wrap">
         <form className="row text-center" onSubmit={this.handleSubmit}>
@@ -73,6 +74,10 @@ class Search extends Component {
       );
     });
 
+    if (this.props.isGeolocationEnabled) {
+      output.push(<option key="USE_GPS_COORDS" value="use-gps-coords">Use Your Location</option>);
+    }
+
     // console.log(regions);
 
     return output;
@@ -89,13 +94,16 @@ class Search extends Component {
   }
 
   handleRegionChange(event) {
+    // console.log(this.props.coords.latitude);
+    // console.log(this.props.coords.longitude);
+
     this.setState({
       keyword: '',
       region: event.target.value,
       date_range: '',
     });
     this.props.toggleLoading(true);
-    this.props.onRegionChange(event.target.value);
+    this.props.onRegionChange(event.target.value, this.props.coords);
   }
 
   handleDateChange(event) {
@@ -124,4 +132,9 @@ const Style = {
   }
 };
 
-export default Search;
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false,
+  },
+  userDecisionTimeout: 5000,
+})(Search);

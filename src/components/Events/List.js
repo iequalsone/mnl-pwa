@@ -2,7 +2,9 @@
 
 import _ from "lodash";
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import geolib from "geolib";
 import {
   fetchEvents,
   fetchEventsByKeyword,
@@ -22,13 +24,19 @@ class List extends Component {
   constructor() {
     super();
 
+    this.state = {
+      nextTag: ""
+    }
+
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.toggleLoading = this.toggleLoading.bind(this);
+    this.resetForm = this.resetForm.bind(this);
   }
 
   render() {
+    // console.log(this.props.regions);
     if (this.props.loading) {
       return <Spinner />;
     } else {
@@ -66,6 +74,8 @@ class List extends Component {
       rows.push(<p className="text-center" key="NO_RESULTS">Sorry, no events to display at this time.</p>);
     }
 
+    rows.push(<p className="text-center" key="RESET_FORM"><button style={{ backgroundColor: "#ef465a" }} className="btn btn-default" onClick={this.resetForm}>Reset</button></p>);
+
     return rows;
   }
 
@@ -81,12 +91,40 @@ class List extends Component {
     this.props.fetchEventsByKeyword(value);
   }
 
-  onRegionChange(value) {
-    this.props.fetchEventsByRegion(value);
+  onRegionChange(value, coords) {
+    // console.log(coords);
+    // console.log(coords.latitude);
+    // console.log(coords.longitude);
+
+    if ((typeof coords !== undefined) && (value === "use-gps-coords")) {
+      _.map(this.props.regions, (region, index) => {
+        let distance = geolib.getDistance(
+          // { latitude: 47.56265129625375, longitude: -52.709770522325 },
+          { latitude: coords.latitude, longitude: coords.longitude },
+          { latitude: region.lat, longitude: region.lng }
+        );
+
+        // console.log(typeof region.lat);
+        // console.log(typeof region.lng);
+
+        if (geolib.convertUnit("mi", distance, 0) <= 100) {
+          // console.log(region.slug);
+          this.props.fetchEventsByRegion(region.slug);
+        }
+      });
+    } else {
+      this.props.fetchEventsByRegion(value);
+    }
   }
 
   onDateChange(value) {
     this.props.fetchEventsByDate(value);
+  }
+
+  resetForm() {
+    this.props.history.push("/");
+    this.props.toggleLoading(true);
+    this.props.fetchEvents();
   }
 
   toggleLoading(flag) {
@@ -97,8 +135,10 @@ class List extends Component {
     const { tag } = this.props.match.params;
 
     if (typeof tag !== "undefined") {
+      this.props.toggleLoading(true);
       this.props.fetchEventsByTag(tag);
     } else {
+      this.props.toggleLoading(true);
       this.props.fetchEvents();
     }
 
@@ -109,6 +149,21 @@ class List extends Component {
     if (prevProps.events !== this.props.events) {
       this.props.toggleLoading(false);
     }
+
+    const { tag } = this.props.match.params;
+
+    if (prevState.nextTag !== this.state.nextTag) {
+      this.props.toggleLoading(true);
+      this.props.fetchEventsByTag(this.state.nextTag);
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.nextTag !== prevState.nextTag) {
+      return { nextTag: nextProps.match.params.tag };
+    }
+
+    return null;
   }
 }
 
