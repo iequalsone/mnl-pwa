@@ -19,6 +19,7 @@ class Single extends Component {
       nextEvent: ""
     }
   }
+
   render() {
     if (this.state.loading) {
       return <Spinner />;

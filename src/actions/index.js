@@ -8,6 +8,8 @@ import {
   FETCH_EVENTS_BY_CATEGORY,
   FETCH_ALL_REGIONS,
   FETCH_EVENT_BY_SLUG,
+  FETCH_NEWS,
+  FETCH_NEWS_BY_SLUG,
   TOGGLE_LOADING
 } from "./types";
 
@@ -110,6 +112,32 @@ export const fetchEventBySlug = (slug) => async dispatch => {
     meta: {
       offline: {
         effect: { url: "https://musicnl.ca/wp-json/dc/v2/event/" + encodeURIComponent(slug), method: "GET", json: res.data }
+      }
+    }
+  });
+}
+
+export const fetchNews = () => async dispatch => {
+  const res = await axios.get("http://localhost:8000/wp-json/web/v1/news");
+  dispatch({
+    type: FETCH_NEWS,
+    payload: res.data,
+    meta: {
+      offline: {
+        effect: { url: "http://localhost:8000/wp-json/web/v1/news", method: "GET", json: res.data }
+      }
+    }
+  });
+}
+
+export const fetchNewsBySlug = (slug) => async dispatch => {
+  const res = await axios.get("http://localhost:8000/wp-json/web/v1/news-item/" + encodeURIComponent(slug));
+  dispatch({
+    type: FETCH_NEWS_BY_SLUG,
+    payload: res.data,
+    meta: {
+      offline: {
+        effect: { url: "http://localhost:8000/wp-json/web/v1/news-item/" + encodeURIComponent(slug), method: "GET", json: res.data }
       }
     }
   });

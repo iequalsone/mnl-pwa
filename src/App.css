@@ -67,3 +67,53 @@ img {
   width: 20px;
   height: 20px;
 }
+
+.MuiAppBar-colorPrimary-26{
+  background-color: #25262a !important;
+}
+
+.MuiDrawer-paper-7 {
+  background-color: #25262a !important;
+}
+
+.drawer-item{
+  padding: .5em 1em;
+  font-size: 1.2em;
+}
+
+.TopBar-menuButton-3:focus {
+  background-color: transparent;
+}
+
+.card, .cat-name {
+  color: #28a8e0;
+}
+
+.card.news, .cat-name.news { 
+  color: #b6d666
+}
+.card.news .btn {
+  background-color: #b6d666;
+}
+
+.card.member-news, .cat-name.member-news {
+  color: #ef465a;
+}
+.card.member-news .btn {
+  background-color: #ef465a;
+}
+
+.card.opportunities, .cat-name.opportunities {
+  color: #f99b1f;
+}
+.card.opportunities .btn {
+  background-color: #f99b1f;
+}
+
+.card .btn {
+  background-color: #b6d666;
+}
+
+.card-body .card-text {
+  margin-bottom: 1em;
+}
