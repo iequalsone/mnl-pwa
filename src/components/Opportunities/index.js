@@ -4,15 +4,15 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  fetchNews,
-  fetchNewsByTag,
+  fetchOpportunities,
+  fetchOpportunitiesByTag,
   toggleLoading
 } from "../../actions";
 
 import Card from "./Card";
 import Spinner from "../common/Spinner";
 
-class NewsList extends Component {
+class OpportunitiesList extends Component {
   constructor() {
     super();
 
@@ -31,7 +31,7 @@ class NewsList extends Component {
       return (
         <div>
           <div className="row">
-            <div className="container news-list">{this.renderRows()}</div>
+            <div className="container opportunities-list">{this.renderRows()}</div>
           </div>
         </div>
       );
@@ -40,12 +40,12 @@ class NewsList extends Component {
 
   renderRows() {
     let rows = [];
-    rows = _.map(this.props.news, (newsItem, index) => {
-      return <Card key={newsItem.id} newsItem={newsItem} />;
+    rows = _.map(this.props.opportunities, (opportunitiesItem, index) => {
+      return <Card key={opportunitiesItem.id} opportunityItem={opportunitiesItem} />;
     });
 
     if (rows.length <= 0) {
-      rows.push(<p className="text-center" key="NO_RESULTS">Sorry, no articles to display at this time.</p>);
+      rows.push(<p className="text-center" key="NO_RESULTS">Sorry, no opportunities to display at this time.</p>);
     }
 
     return rows;
@@ -60,15 +60,15 @@ class NewsList extends Component {
 
     if (typeof tag !== "undefined") {
       this.props.toggleLoading(true);
-      this.props.fetchNewsByTag(tag);
+      this.props.fetchOpportunitiesByTag(tag);
     } else {
       this.props.toggleLoading(true);
-      this.props.fetchNews();
+      this.props.fetchOpportunities();
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.news !== this.props.news) {
+    if (prevProps.opportunities !== this.props.opportunities) {
       this.props.toggleLoading(false);
     }
 
@@ -76,7 +76,7 @@ class NewsList extends Component {
 
     if (prevState.nextTag !== this.state.nextTag) {
       this.props.toggleLoading(true);
-      this.props.fetchNewsByTag(this.state.nextTag);
+      this.props.fetchOpportunitiesByTag(this.state.nextTag);
     }
   }
 
@@ -89,12 +89,12 @@ class NewsList extends Component {
   }
 }
 
-function mapStateToProps({ news, loading }) {
-  return { news, loading }
+function mapStateToProps({ opportunities, loading }) {
+  return { opportunities, loading }
 }
 
 export default connect(mapStateToProps, {
-  fetchNews,
-  fetchNewsByTag,
+  fetchOpportunities,
+  fetchOpportunitiesByTag,
   toggleLoading
-})(NewsList);
+})(OpportunitiesList);

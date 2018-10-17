@@ -58,6 +58,11 @@ class EventHeader extends Component {
 
     let icon = { caret: "left" };
 
+    let items = [
+      { outlook: 'Outlook' },
+      { google: 'Google' }
+    ];
+
     return (
       <div className="event-header">
         <div style={{ marginBottom: "2em" }} className="col-12 text-center">{this.renderImage(image, title)}</div>
@@ -73,6 +78,7 @@ class EventHeader extends Component {
             event={event}
             displayItemIcons={false}
             buttonTemplate={icon}
+          // listItems={items}
           />
         </div>
       </div>

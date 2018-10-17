@@ -9,5 +9,10 @@ export const FETCH_EVENT_BY_SLUG = "fetch_event_by_slug";
 
 export const FETCH_NEWS = "fetch_news";
 export const FETCH_NEWS_BY_SLUG = "fetch_news_by_slug";
+export const FETCH_NEWS_BY_TAG = "fetch_news_by_tag";
+
+export const FETCH_OPPORTUNITIES = "fetch_opportunities";
+export const FETCH_OPPORTUNITY_BY_SLUG = "fetch_opportunity_by_slug";
+export const FETCH_OPPORTUNITIES_BY_TAG = "fetch_opportunities_by_tag";
 
 export const TOGGLE_LOADING = "toggle_loading";

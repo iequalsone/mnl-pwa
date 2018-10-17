@@ -18,6 +18,10 @@ img {
   height: auto !important;
 }
 
+.warning {
+  color: #ef465a;
+}
+
 .react-add-to-calendar{
   position: relative;
   z-index: 1;
@@ -68,52 +72,79 @@ img {
   height: 20px;
 }
 
-.MuiAppBar-colorPrimary-26{
+.MuiAppBar-colorPrimary-26, .jss26{
   background-color: #25262a !important;
 }
 
-.MuiDrawer-paper-7 {
+.MuiDrawer-paper-7, .jss7 {
   background-color: #25262a !important;
 }
+
 
 .drawer-item{
   padding: .5em 1em;
   font-size: 1.2em;
 }
 
-.TopBar-menuButton-3:focus {
+.MuiListItem-button-137, .jss137 {
+  color: "#ffffff";
+  text-transform: "uppercase";
+}
+
+.TopBar-menuButton-3:focus, button.jss3:focus {
   background-color: transparent;
+}
+
+.event-article, .article {
+  width: 100%;
+}
+
+.article.opportunity a{
+  color: #f99b1f;
 }
 
 .card, .cat-name {
   color: #28a8e0;
 }
+.card .btn {
+  background-color: #28a8e0;
+}
+.card-body p {
+  word-break: break-all;
+}
+.card-body .card-text {
+  margin-bottom: 1em;
+}
+.card, .start-date {
+  color: rgb(155, 156, 159);
+}
 
-.card.news, .cat-name.news { 
+.news-list .card, .cat-name {
+  color: #b6d666;
+}
+.news-list .card .btn {
+  background-color: #b6d666;
+}
+.card.news, .cat-name.news, .card.news .tags a, .news-list .card .tags a { 
   color: #b6d666
 }
 .card.news .btn {
   background-color: #b6d666;
 }
 
-.card.member-news, .cat-name.member-news {
+.card.member-news, .cat-name.member-news, .card.member-news .tags a {
   color: #ef465a;
 }
 .card.member-news .btn {
   background-color: #ef465a;
 }
 
-.card.opportunities, .cat-name.opportunities {
+.card.opportunities, 
+.card.opportunities .cat-name, 
+.card.opportunities .cat-name.opportunities,
+.card.opportunities .tags a{
   color: #f99b1f;
 }
 .card.opportunities .btn {
   background-color: #f99b1f;
-}
-
-.card .btn {
-  background-color: #b6d666;
-}
-
-.card-body .card-text {
-  margin-bottom: 1em;
 }

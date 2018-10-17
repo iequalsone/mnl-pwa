@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import NewsTagLink from "../common/NewsTagLink";
+import OpportunitiesTagLink from "../common/OpportunitiesTagLink";
 import dateFormat from "dateformat";
 
 class Card extends Component {
-  renderDateTime(pub_date) {
-    if (typeof pub_date !== "undefined") {
+  renderDeadline(value) {
+    if (typeof value !== "undefined") {
       return (
         <p className="card-text start-date">
-          {dateFormat(pub_date, "mmmm d, yyyy")}
+          <span className="warning">DEADLINE: {dateFormat(value, "mmmm d, yyyy")}</span>
         </p>
       );
     }
@@ -19,7 +19,7 @@ class Card extends Component {
   renderTags(tags) {
     if (typeof tags !== "undefined") {
       let output = tags.map(t => {
-        return <NewsTagLink key={t} tag={t} />;
+        return <OpportunitiesTagLink key={t} tag={t} />;
       });
 
       return output;
@@ -36,12 +36,14 @@ class Card extends Component {
     }
 
     switch (output[0]) {
-      case "news":
-        return <p className={`cat-name ${output[0]}`}>News</p>;
-      case "member-news":
-        return <p className={`cat-name ${output[0]}`}>Member News</p>;
-      case "opportunities":
-        return <p className={`cat-name ${output[0]}`}>Opportunities</p>;
+      case "awards-and-showcases":
+        return <p className={`cat-name ${output[0]}`}>Awards and Showcases</p>;
+      case "2-external-funding":
+        return <p className={`cat-name ${output[0]}`}>External Funding</p>;
+      case "1-internal-funding":
+        return <p className={`cat-name ${output[0]}`}>Internal Funding</p>;
+      case "3-other-opportunities":
+        return <p className={`cat-name ${output[0]}`}>Other Opportunities</p>;
       default:
         return;
     }
@@ -51,12 +53,12 @@ class Card extends Component {
     const {
       slug,
       title,
-      sub_title,
-      pub_date,
+      deadline,
+      excerpt,
       tags,
       category
-    } = this.props.newsItem;
-    var path = "/news-item/" + slug;
+    } = this.props.opportunityItem;
+    var path = "/opportunity-item/" + slug;
 
     let cat = category.map(t => {
       return t;
@@ -64,14 +66,14 @@ class Card extends Component {
 
     return (
       <div className="col-12">
-        <div style={Style.CardStyle} className={`card mb-4 box-shadow ${cat}`} >
+        <div style={Style.CardStyle} className={`card mb-4 box-shadow opportunities`} >
           <div style={Style.BodyStyle} className="card-body">
             {this.renderCategory(category)}
             <NavLink style={Style.LinkStyle} to={path}>
               <h3 style={Style.TitleStyle} className="card-text title">{title}</h3>
             </NavLink>
-            <h4 style={Style.SubTitleStyle}>{sub_title}</h4>
-            {this.renderDateTime(pub_date)}
+            {this.renderDeadline(deadline)}
+            <p>{excerpt}</p>
             <div className="justify-content-between align-items-center">
               <p className="card-text tags">{this.renderTags(tags)}</p>
             </div>

@@ -10,6 +10,8 @@ import EventsList from "./components/Events/List";
 import EventSingle from "./components/Event/Single";
 import NewsList from "./components/News";
 import NewsSingle from "./components/News/NewsSingle";
+import OpportunitiesList from "./components/Opportunities";
+import OpportunitySingle from "./components/Opportunities/OpportunitySingle";
 
 import './App.css';
 
@@ -24,10 +26,6 @@ class App extends Component {
 
             <Route exact path="/" component={withTracker(EventsList)} />
             <Route exact path="/event/:slug?" component={withTracker(EventSingle)} />
-
-            <Route exact path="/news" component={withTracker(NewsList)} />
-            <Route exact path="/news-item/:slug?" component={withTracker(NewsSingle)} />
-
             <Route
               path={
                 "/" +
@@ -37,13 +35,26 @@ class App extends Component {
               component={withTracker(EventsList)}
             />
 
+            <Route exact path="/news" component={withTracker(NewsList)} />
+            <Route exact path="/news-item/:slug?" component={withTracker(NewsSingle)} />
             <Route
               path={
                 "/" +
                 process.env.REACT_APP_NEWS_TAG_URL +
                 "/:tag?"
               }
-              component={withTracker(EventsList)}
+              component={withTracker(NewsList)}
+            />
+
+            <Route exact path="/opportunities" component={withTracker(OpportunitiesList)} />
+            <Route exact path="/opportunity-item/:slug?" component={withTracker(OpportunitySingle)} />
+            <Route
+              path={
+                "/" +
+                process.env.REACT_APP_OPPORTUNITIES_TAG_URL +
+                "/:tag?"
+              }
+              component={withTracker(OpportunitiesList)}
             />
           </div>
         </Router>

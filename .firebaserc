@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "mnl-pwa-f5127"
+    "default": "mnl-pwa-f5127",
+    "staging": "mnl-pwa-staging"
   }
 }

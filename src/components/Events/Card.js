@@ -26,7 +26,7 @@ class Card extends Component {
   renderDateTime(start_date) {
     if (typeof start_date !== "undefined") {
       return (
-        <p style={Style.DateStyle} className="card-text start-date">
+        <p className="card-text start-date">
           {dateFormat(start_date, "mmmm d, yyyy, h:MM TT")}
         </p>
       );
@@ -81,6 +81,8 @@ class Card extends Component {
             <div className="justify-content-between align-items-center">
               <p className="card-text tags">{this.renderTags(tags)}</p>
             </div>
+
+            <NavLink to={path} className="btn btn-primary">Learn More</NavLink>
           </div>
         </div>
       </div>
