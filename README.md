@@ -1,3 +1,7 @@
+## Jon's NOTES Nov 19, 2018
+- Data feeds are supplied by MNL website. If there's issues with the PWA or Website Events app, please make sure the plugin "mnl-custom-rest-routes" is up-to-date with the latest commit. SSH into the MNL website, go to the plugin folder and go a git status. If there are commits you do not have, do git pull inside the plugin directory, on the server.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
